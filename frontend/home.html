@@ -533,9 +533,11 @@
         <li><a href="#testimonials">Reviews</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="index.html" class="btn btn-outline">Sign In</a>
-        <a href="index.html?tab=register" class="btn btn-solid"
-          >Get Started Free</a
+        <a href="dashboard.html" class="btn btn-outline"
+          ><i class="fas fa-gauge-high"></i> Dashboard</a
+        >
+        <a href="#" id="logoutBtn" class="btn btn-solid"
+          ><i class="fas fa-right-from-bracket"></i> Logout</a
         >
       </div>
     </nav>
@@ -884,6 +886,19 @@
 
       // Handle ?tab=register redirect to index.html
       // (index.html reads this param and auto-opens register tab)
+
+      // Logout: clear session/token and redirect to Login page
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          localStorage.removeItem("mf_token");
+          localStorage.removeItem("mf_user");
+          sessionStorage.clear();
+          window.location.href = "index.html";
+        });
+      }
     </script>
+    <script src="/chatbot-widget.js"></script>
   </body>
 </html>

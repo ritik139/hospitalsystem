@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
       :root {
         --primary: #4f46e5;
@@ -239,6 +240,31 @@
       }
       .switch-link a:hover {
         text-decoration: underline;
+      }
+
+      /* ── OAuth divider + Google button ─────────────────────────────── */
+      .oauth-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 1.2rem 0;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+      }
+      .oauth-divider::before,
+      .oauth-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .google-btn-wrap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .google-btn-wrap > div {
+        width: 100% !important;
       }
 
       /* ═══ APP SHELL ════════════════════════════════════════════════════ */
@@ -511,6 +537,11 @@
           <button class="btn-submit" id="login-btn" onclick="handleLogin()">
             <i class="fas fa-sign-in-alt"></i> Sign In to Dashboard
           </button>
+
+          <div class="oauth-divider">or</div>
+
+          <div id="google-signin-error" class="msg error"></div>
+          <div class="google-btn-wrap" id="google-btn-login"></div>
 
           <p class="switch-link">
             Don't have an account?
@@ -888,7 +919,7 @@
     <div id="toast">Operation Successful</div>
 
     <script>
-     const API = "https://hospitalsystem-nhc0.onrender.com/api";
+     const API = "http://localhost:5000/api";
       let authToken = localStorage.getItem("mf_token") || null;
       let currentUser = JSON.parse(localStorage.getItem("mf_user") || "null");
       let state = {
@@ -982,7 +1013,7 @@
             return;
           }
           saveSession(data.token, data.user);
-          bootApp();
+          window.location.href = "home.html";
         } catch (e) {
           showMsg(
             "login-error",
@@ -995,6 +1026,64 @@
             '<i class="fas fa-sign-in-alt"></i> Sign In to Dashboard';
         }
       }
+
+      /* ── GOOGLE SIGN-IN ───────────────────────────────────────────── */
+      // replace with your real Client ID
+
+      const GOOGLE_CLIENT_ID = "680101365187-t112nc54kk3f2ecn5lvnktcl5khm52rm.apps.googleusercontent.com";
+
+      function initGoogleSignIn() {
+        if (!window.google || !google.accounts || !google.accounts.id) {
+          // Library not loaded yet — try again shortly
+          setTimeout(initGoogleSignIn, 300);
+          return;
+        }
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogleCredentialResponse,
+        });
+        const btnContainer = document.getElementById("google-btn-login");
+        if (btnContainer) {
+          google.accounts.id.renderButton(btnContainer, {
+            type: "standard",
+            theme: "outline",
+            size: "large",
+            text: "continue_with",
+            shape: "rectangular",
+            width: 320,
+          });
+        }
+      }
+
+      async function handleGoogleCredentialResponse(response) {
+        hideMsg("google-signin-error");
+        try {
+          const res = await fetch(`${API}/auth/google`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ credential: response.credential }),
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            showMsg(
+              "google-signin-error",
+              data.message || "Google sign-in failed.",
+              "error"
+            );
+            return;
+          }
+          saveSession(data.token, data.user);
+          window.location.href = "home.html";
+        } catch (e) {
+          showMsg(
+            "google-signin-error",
+            "Cannot reach server. Is it running on port 5000?",
+            "error"
+          );
+        }
+      }
+
+      initGoogleSignIn();
 
       /* ── REGISTER ─────────────────────────────────────────────────── */
       async function handleRegister() {
@@ -1049,7 +1138,9 @@
             "success"
           );
           saveSession(data.token, data.user);
-          setTimeout(bootApp, 1000);
+          setTimeout(() => {
+            window.location.href = "home.html";
+          }, 1000);
         } catch (e) {
           showMsg(
             "register-error",
@@ -1538,5 +1629,6 @@
         setTimeout(() => (t.style.transform = "translateY(200%)"), 2500);
       }
     </script>
+    <script src="/chatbot-widget.js"></script>
   </body>
 </html>

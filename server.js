@@ -16,9 +16,36 @@ app.get("/.well-known/appspecific/com.chrome.devtools.json", (req, res) => {
   res.json({});
 });
 
-// ─── Serve index.html (works whether it's in /frontend or same folder) ────────
-app.use(express.static(path.join(__dirname, "frontend")));
-app.use(express.static(__dirname)); // fallback: index.html next to server.js
+// ─── Default route: open the Home page when the website loads ───────────────
+// Registered BEFORE the static middleware below, and static's own
+// auto-index behavior is disabled (index: false). Without this, express
+// .static would silently serve frontend/index.html for "/" on its own,
+// before this route ever ran - which is why the site was opening the
+// Login page instead of the Home page on first visit.
+app.get("/", (req, res) => {
+  const fs = require("fs");
+  const frontendHome = path.join(__dirname, "frontend", "home.html");
+  const rootHome = path.join(__dirname, "home.html");
+  if (fs.existsSync(frontendHome)) {
+    res.sendFile(frontendHome);
+  } else if (fs.existsSync(rootHome)) {
+    res.sendFile(rootHome);
+  } else {
+    res
+      .status(404)
+      .send(
+        "home.html not found. Please place it in the same folder as server.js or inside a /frontend subfolder."
+      );
+  }
+});
+
+// ─── Serve remaining static files (CSS/JS/images, other pages like
+//     index.html, about.html, dashboard.html when explicitly requested) ──────
+// { index: false } stops these from auto-serving index.html for "/" or any
+// other directory-style request, so the explicit "/" route above is always
+// the one that decides what opens by default.
+app.use(express.static(path.join(__dirname, "frontend"), { index: false }));
+app.use(express.static(__dirname, { index: false })); // fallback: files next to server.js
 
 // ─── API Routes ───────────────────────────────────────────────────────────────
 app.use("/api/patients", require("./routes/patients"));
@@ -28,6 +55,7 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/billing", require("./routes/billing"));
 app.use("/api/home",  require("./routes/home"));
 app.use("/api/about", require("./routes/about"));
+app.use("/api/chatbot", require("./routes/chatbot"));
 
 // ─── Catch-all: serve index.html for any unknown route ───────────────────────
 app.get("*", (req, res) => {

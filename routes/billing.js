@@ -1,6 +1,42 @@
 const express = require("express");
 const router = express.Router();
 const Bill = require("../models/Bill");
+const Appointment = require("../models/Appointment");
+
+// ─── Helper: find (and remember) which appointment a bill belongs to ─────────
+// Prefers the stored link; falls back to matching patient + doctor name
+// (most recent visit) since the "Add Bill" form doesn't collect an
+// appointment ID directly.
+async function linkAppointment(bill) {
+  if (bill.appointmentId) {
+    const linked = await Appointment.findById(bill.appointmentId);
+    if (linked) return linked;
+  }
+  const match = await Appointment.findOne({
+    pName: bill.patientName,
+    dName: bill.doctorName,
+  }).sort({ date: -1 });
+
+  if (match) {
+    bill.appointmentId = match._id;
+    await bill.save();
+  }
+  return match;
+}
+
+// ─── Helper: push a bill's status onto its matching appointment's payment ────
+async function syncAppointmentForBill(bill) {
+  try {
+    const appointment = await linkAppointment(bill);
+    if (!appointment) return;
+    if (appointment.payment !== bill.status) {
+      appointment.payment = bill.status;
+      await appointment.save();
+    }
+  } catch (err) {
+    console.error("Appointment sync error:", err.message);
+  }
+}
 
 // GET all bills
 router.get("/", async (req, res) => {
@@ -31,6 +67,10 @@ router.post("/", async (req, res) => {
       status: status || "Unpaid",
       notes: notes || "",
     });
+
+    // Mirror the bill's status onto the matching appointment's payment field.
+    await syncAppointmentForBill(bill);
+
     res.status(201).json(bill);
   } catch (err) {
     res
@@ -46,6 +86,13 @@ router.put("/:id", async (req, res) => {
       new: true,
     });
     if (!bill) return res.status(404).json({ message: "Bill not found" });
+
+    // Whenever status is touched (e.g. toggleBillStatus), keep the
+    // appointment's payment field synced to match.
+    if (req.body.status !== undefined) {
+      await syncAppointmentForBill(bill);
+    }
+
     res.json(bill);
   } catch (err) {
     res

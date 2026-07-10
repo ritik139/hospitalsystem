@@ -17,22 +17,8 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: function () {
-        // Google-authenticated users don't have a local password
-        return !this.googleId;
-      },
+      required: [true, "Password is required"],
       minlength: 6,
-    },
-    googleId: {
-      type: String,
-      default: null,
-      unique: true,
-      sparse: true, // allows many docs with no googleId without violating uniqueness
-    },
-    authProvider: {
-      type: String,
-      enum: ["local", "google"],
-      default: "local",
     },
     role: {
       type: String,
@@ -43,16 +29,15 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Hash password before saving (skip if there's no password, e.g. Google users)
+// Hash password before saving
 userSchema.pre("save", async function (next) {
-  if (!this.password || !this.isModified("password")) return next();
+  if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
 
 // Compare password helper
 userSchema.methods.comparePassword = async function (candidatePassword) {
-  if (!this.password) return false; // Google-only account, no local password set
   return bcrypt.compare(candidatePassword, this.password);
 };
 

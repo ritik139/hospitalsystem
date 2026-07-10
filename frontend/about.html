@@ -1,6 +1,1081 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head><!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediFlow Pro | About Us</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --secondary: #7c3aed;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --text: #1e293b;
+        --muted: #64748b;
+        --border: #e2e8f0;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+      }
+      a {
+        text-decoration: none;
+      }
+
+      /* NAVBAR */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 70px;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary);
+      }
+      .nav-links-bar {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links-bar a {
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: 0.2s;
+      }
+      .nav-links-bar a:hover,
+      .nav-links-bar a.active {
+        color: var(--primary);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.65rem 1.4rem;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 0.88rem;
+        cursor: pointer;
+        transition: 0.2s;
+        border: none;
+        font-family: inherit;
+      }
+      .btn-outline {
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        background: transparent;
+      }
+      .btn-outline:hover {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn-solid {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn-solid:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+      }
+      .btn-lg {
+        padding: 0.85rem 2rem;
+        font-size: 1rem;
+        border-radius: 12px;
+      }
+
+      /* PAGE HEADER */
+      .page-header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        padding: 140px 5% 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .page-header::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+      .page-header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+      .page-header p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        max-width: 550px;
+        margin: 0 auto;
+        line-height: 1.8;
+        position: relative;
+      }
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+        position: relative;
+      }
+      .breadcrumb a {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .breadcrumb a:hover {
+        color: #fff;
+      }
+
+      /* SECTIONS */
+      .section {
+        padding: 5rem 5%;
+      }
+      .section-label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+      }
+      .section-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+      }
+      .section-sub {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.8;
+        max-width: 560px;
+      }
+
+      /* MISSION */
+      .mission-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-top: 3rem;
+      }
+      .mission-visual {
+        background: linear-gradient(135deg, #ede9fe, #dbeafe);
+        border-radius: 24px;
+        height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8rem;
+        color: var(--primary);
+      }
+      .mission-points {
+        margin-top: 1.5rem;
+      }
+      .mission-point {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 1.2rem;
+      }
+      .mission-point .icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #ede9fe;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.85rem;
+        margin-top: 2px;
+      }
+      .mission-point strong {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+      }
+      .mission-point p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      /* TEAM */
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+      .team-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 2rem;
+        text-align: center;
+        transition: 0.3s;
+      }
+      .team-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(79, 70, 229, 0.1);
+      }
+      .team-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #fff;
+        margin: 0 auto 1rem;
+      }
+      .team-card h3 {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .team-card .role {
+        font-size: 0.82rem;
+        color: var(--primary);
+        font-weight: 600;
+        margin: 0.3rem 0 0.7rem;
+      }
+      .team-card p {
+        font-size: 0.83rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .team-socials {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 1rem;
+      }
+      .team-socials a {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 0.8rem;
+        transition: 0.2s;
+      }
+      .team-socials a:hover {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      /* VALUES */
+      .values-bg {
+        background: linear-gradient(135deg, #f8fafc, #f0f0ff);
+      }
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+      .value-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 2rem;
+      }
+      .value-card .v-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      .value-card h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .value-card p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      /* TECH STACK */
+      .tech-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .tech-chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.7rem 1.2rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+      .tech-chip:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .tech-chip i {
+        font-size: 1rem;
+      }
+
+      /* TIMELINE */
+      .timeline {
+        margin-top: 3rem;
+        position: relative;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border);
+      }
+      .tl-item {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+      .tl-dot {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        z-index: 1;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+      }
+      .tl-content {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.2rem 1.5rem;
+        flex: 1;
+      }
+      .tl-content .yr {
+        font-size: 0.75rem;
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .tl-content h4 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .tl-content p {
+        font-size: 0.83rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      /* CONTACT */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+        margin-top: 3rem;
+      }
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .contact-item {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .contact-item .ci {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #ede9fe;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .contact-item strong {
+        display: block;
+        font-size: 0.88rem;
+        margin-bottom: 0.2rem;
+      }
+      .contact-item span {
+        font-size: 0.83rem;
+        color: var(--muted);
+      }
+      .contact-form {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2rem;
+      }
+      .contact-form h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+      .cf-field {
+        margin-bottom: 1rem;
+      }
+      .cf-field label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+      }
+      .cf-field input,
+      .cf-field textarea,
+      .cf-field select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        border: 1.5px solid var(--border);
+        background: #f8fafc;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 0.9rem;
+        transition: 0.2s;
+      }
+      .cf-field textarea {
+        height: 100px;
+        resize: vertical;
+      }
+      .cf-field input:focus,
+      .cf-field textarea:focus,
+      .cf-field select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        background: #fff;
+      }
+      .cf-msg {
+        padding: 0.7rem 1rem;
+        border-radius: 8px;
+        font-size: 0.83rem;
+        font-weight: 600;
+        display: none;
+        margin-bottom: 1rem;
+      }
+      .cf-msg.success {
+        background: #dcfce7;
+        color: #166534;
+        display: block;
+      }
+      .cf-msg.error {
+        background: #fee2e2;
+        color: #991b1b;
+        display: block;
+      }
+
+      /* CTA + FOOTER */
+      .cta-section {
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        padding: 5rem 5%;
+        text-align: center;
+      }
+      .cta-section h2 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 0.8rem;
+      }
+      .cta-section p {
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 2rem;
+      }
+      footer {
+        background: #0f172a;
+        padding: 3rem 5%;
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        color: #fff;
+        font-size: 1.1rem;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+        transition: 0.2s;
+      }
+      .footer-links a:hover {
+        color: #fff;
+      }
+      .footer-copy {
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.8rem;
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      @media (max-width: 768px) {
+        .mission-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-header h1 {
+          font-size: 2rem;
+        }
+        nav .nav-links-bar {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <div class="nav-logo">
+        <i class="fas fa-shield-virus"></i> MediFlow Pro
+      </div>
+      <ul class="nav-links-bar">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="home.html#features">Features</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div style="display: flex; gap: 10px">
+        <a href="index.html" class="btn btn-outline">Sign In</a>
+        <a href="index.html" class="btn btn-solid">Get Started</a>
+      </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="home.html">Home</a>
+        <i class="fas fa-chevron-right" style="font-size: 0.7rem"></i> About Us
+      </div>
+      <h1>About MediFlow Pro</h1>
+      <p>
+        We're building the future of hospital management — secure, real-time,
+        and designed for the people who care for patients.
+      </p>
+    </div>
+
+    <!-- MISSION -->
+    <section class="section">
+      <div class="mission-grid">
+        <div>
+          <div class="section-label">Our Mission</div>
+          <div class="section-title">Healthcare Management, Simplified</div>
+          <p style="color: var(--muted); line-height: 1.8; font-size: 0.95rem">
+            MediFlow Pro was built because managing a hospital shouldn't require
+            a PhD in software. We believe every clinical team — from solo
+            clinics to multi-department hospitals — deserves a fast, secure, and
+            intuitive platform.
+          </p>
+          <div class="mission-points">
+            <div class="mission-point">
+              <div class="icon"><i class="fas fa-bolt"></i></div>
+              <div>
+                <strong>Real-Time Everything</strong>
+                <p>
+                  Every patient, appointment, and billing update reflects
+                  instantly across all connected users via MongoDB live sync.
+                </p>
+              </div>
+            </div>
+            <div class="mission-point">
+              <div class="icon"><i class="fas fa-lock"></i></div>
+              <div>
+                <strong>Security First</strong>
+                <p>
+                  JWT authentication, bcrypt password hashing, and role-based
+                  access ensure every user sees exactly what they should.
+                </p>
+              </div>
+            </div>
+            <div class="mission-point">
+              <div class="icon"><i class="fas fa-users"></i></div>
+              <div>
+                <strong>Built for Teams</strong>
+                <p>
+                  Admins, doctors, and front desk staff each have a tailored
+                  experience — no clutter, no confusion.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mission-visual"><i class="fas fa-hospital-user"></i></div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="section values-bg">
+      <div style="text-align: center">
+        <div class="section-label">What We Stand For</div>
+        <div class="section-title">Our Core Values</div>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="v-icon" style="background: #ede9fe; color: #7c3aed">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Patient First</h3>
+          <p>
+            Every feature we build is evaluated by one question: does this help
+            clinical teams give better care to patients?
+          </p>
+        </div>
+        <div class="value-card">
+          <div class="v-icon" style="background: #dcfce7; color: #16a34a">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Uncompromising Security</h3>
+          <p>
+            Medical data is sacred. We use industry-standard encryption, JWT
+            tokens, and zero data-sharing policies.
+          </p>
+        </div>
+        <div class="value-card">
+          <div class="v-icon" style="background: #fef3c7; color: #d97706">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3>Speed & Reliability</h3>
+          <p>
+            A slow HMS costs lives. We obsess over performance — 99.9% uptime
+            and sub-second response times.
+          </p>
+        </div>
+        <div class="value-card">
+          <div class="v-icon" style="background: #dbeafe; color: #2563eb">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>Continuous Innovation</h3>
+          <p>
+            We ship new features every month based on real feedback from the
+            hospital teams using MediFlow daily.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="section">
+      <div class="section-label">The People Behind It</div>
+      <div class="section-title">Meet the Team</div>
+      <p class="section-sub">
+        A passionate team of engineers and healthcare domain experts working to
+        modernise hospital operations worldwide.
+      </p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div
+            class="team-avatar"
+            style="background: linear-gradient(135deg, #4f46e5, #7c3aed)"
+          >
+            RK
+          </div>
+          <h3>Ritik Kumar</h3>
+          <div class="role">Founder & Lead Developer</div>
+          <p>
+            Full-stack engineer specialising in Node.js, MongoDB, and healthcare
+            systems. Built MediFlow from the ground up.
+          </p>
+          <div class="team-socials">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="team-card">
+          <div
+            class="team-avatar"
+            style="background: linear-gradient(135deg, #7c3aed, #a855f7)"
+          >
+            SM
+          </div>
+          <h3>Sanya Mehta</h3>
+          <div class="role">UI/UX Designer</div>
+          <p>
+            Designs every screen with clinical teams in mind. Believes great
+            software should feel effortless, not just look good.
+          </p>
+          <div class="team-socials">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="team-card">
+          <div
+            class="team-avatar"
+            style="background: linear-gradient(135deg, #10b981, #0891b2)"
+          >
+            AJ
+          </div>
+          <h3>Arjun Joshi</h3>
+          <div class="role">Backend & Security Engineer</div>
+          <p>
+            Owns all things infrastructure — JWT auth, bcrypt, MongoDB
+            optimisation, and making sure nothing ever goes down.
+          </p>
+          <div class="team-socials">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="team-card">
+          <div
+            class="team-avatar"
+            style="background: linear-gradient(135deg, #f59e0b, #ef4444)"
+          >
+            NP
+          </div>
+          <h3>Dr. Neha Patel</h3>
+          <div class="role">Healthcare Domain Advisor</div>
+          <p>
+            Practising physician who ensures every feature actually solves real
+            clinical workflow problems — not imagined ones.
+          </p>
+          <div class="team-socials">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section
+      class="section"
+      style="background: linear-gradient(135deg, #f8fafc, #f0f0ff)"
+    >
+      <div class="section-label">Under the Hood</div>
+      <div class="section-title">Technology Stack</div>
+      <p class="section-sub">
+        We chose every technology deliberately — for reliability, security, and
+        developer experience.
+      </p>
+      <div class="tech-grid">
+        <div class="tech-chip" style="color: #68a063">
+          <i class="fab fa-node-js"></i> Node.js + Express
+        </div>
+        <div class="tech-chip" style="color: #4db33d">
+          <i class="fas fa-database"></i> MongoDB + Mongoose
+        </div>
+        <div class="tech-chip" style="color: #4f46e5">
+          <i class="fas fa-key"></i> JWT Authentication
+        </div>
+        <div class="tech-chip" style="color: #ef4444">
+          <i class="fas fa-lock"></i> Bcrypt Password Hashing
+        </div>
+        <div class="tech-chip" style="color: #f59e0b">
+          <i class="fab fa-js"></i> Vanilla JS Frontend
+        </div>
+        <div class="tech-chip" style="color: #06b6d4">
+          <i class="fas fa-palette"></i> Custom CSS Design System
+        </div>
+        <div class="tech-chip" style="color: #6366f1">
+          <i class="fas fa-server"></i> REST API Architecture
+        </div>
+        <div class="tech-chip" style="color: #10b981">
+          <i class="fas fa-shield-alt"></i> Role-Based Access Control
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNEY TIMELINE -->
+    <section class="section">
+      <div class="section-label">Our Journey</div>
+      <div class="section-title">How MediFlow Grew</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot">Q1</div>
+          <div class="tl-content">
+            <div class="yr">2025 — Beginning</div>
+            <h4>Idea & First Prototype</h4>
+            <p>
+              Started as a simple patient register tool for a local clinic.
+              Built the first version with Node.js and MongoDB in 2 weeks.
+            </p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">Q2</div>
+          <div class="tl-content">
+            <div class="yr">2025 — Growth</div>
+            <h4>Authentication & Role System</h4>
+            <p>
+              Added JWT-based login, bcrypt password hashing, and role-based
+              access for Admin, Doctor, and Front Desk users.
+            </p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">Q3</div>
+          <div class="tl-content">
+            <div class="yr">2025 — Expansion</div>
+            <h4>Billing Module & Invoicing</h4>
+            <p>
+              Launched the full billing system with add bill, toggle payment
+              status, and printable professional invoices.
+            </p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">Q4</div>
+          <div class="tl-content">
+            <div class="yr">2026 — Now</div>
+            <h4>Public Launch & Home/About Pages</h4>
+            <p>
+              Launched the public-facing Home and About pages. Now serving 500+
+              hospitals with real-time HMS features.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section
+      class="section"
+      id="contact"
+      style="background: linear-gradient(135deg, #f8fafc, #f0f0ff)"
+    >
+      <div class="section-label">Get in Touch</div>
+      <div class="section-title">Contact Us</div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p style="color: var(--muted); line-height: 1.8; margin-bottom: 1rem">
+            Have a question, want a demo, or need support? Our team usually
+            responds within a few hours.
+          </p>
+          <div class="contact-item">
+            <div class="ci"><i class="fas fa-envelope"></i></div>
+            <div>
+              <strong>Email Us</strong><span>hello@mediflowpro.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci"><i class="fas fa-phone"></i></div>
+            <div><strong>Call Us</strong><span>+91 98765 43210</span></div>
+          </div>
+          <div class="contact-item">
+            <div class="ci"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <strong>Office</strong><span>Jaipur, Rajasthan, India</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci"><i class="fas fa-clock"></i></div>
+            <div>
+              <strong>Support Hours</strong
+              ><span>Mon–Sat, 9 AM – 7 PM IST</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Send a Message</h3>
+          <div class="cf-msg" id="cf-feedback"></div>
+          <div class="cf-field">
+            <label>Your Name</label
+            ><input type="text" id="cf-name" placeholder="Dr. Jane Smith" />
+          </div>
+          <div class="cf-field">
+            <label>Email Address</label
+            ><input type="email" id="cf-email" placeholder="you@hospital.com" />
+          </div>
+          <div class="cf-field">
+            <label>Subject</label>
+            <select id="cf-subject">
+              <option>General Enquiry</option>
+              <option>Request a Demo</option>
+              <option>Technical Support</option>
+              <option>Billing Question</option>
+              <option>Partnership</option>
+            </select>
+          </div>
+          <div class="cf-field">
+            <label>Message</label
+            ><textarea
+              id="cf-message"
+              placeholder="Tell us how we can help..."
+            ></textarea>
+          </div>
+          <button
+            class="btn btn-solid"
+            style="width: 100%; padding: 0.85rem; font-size: 0.95rem"
+            onclick="sendContact()"
+          >
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2>Ready to Try MediFlow Pro?</h2>
+      <p>
+        Join hundreds of hospital teams already running on MediFlow. Free to get
+        started.
+      </p>
+      <a href="index.html" class="btn btn-solid btn-lg"
+        ><i class="fas fa-rocket"></i> Go to Dashboard</a
+      >
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <i class="fas fa-shield-virus"></i> MediFlow Pro
+        </div>
+        <div class="footer-links">
+          <a href="home.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="index.html">Login</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <p class="footer-copy">
+        © 2026 MediFlow Pro. Enterprise Hospital Management System. All rights
+        reserved.
+      </p>
+    </footer>
+
+    <script>
+      async function sendContact() {
+        const name = document.getElementById("cf-name").value.trim();
+        const email = document.getElementById("cf-email").value.trim();
+        const subject = document.getElementById("cf-subject").value;
+        const message = document.getElementById("cf-message").value.trim();
+        const fb = document.getElementById("cf-feedback");
+        fb.className = "cf-msg";
+        fb.style.display = "none";
+
+        if (!name || !email || !message) {
+          fb.textContent = "Please fill in all required fields.";
+          fb.className = "cf-msg error";
+          return;
+        }
+
+        const btn = event.target;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        try {
+          const res = await fetch("/api/about/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, subject, message }),
+          });
+          const data = await res.json();
+          if (res.ok) {
+            fb.textContent =
+              "✅ Message sent! We'll get back to you within 24 hours.";
+            fb.className = "cf-msg success";
+            document.getElementById("cf-name").value = "";
+            document.getElementById("cf-email").value = "";
+            document.getElementById("cf-message").value = "";
+          } else {
+            fb.textContent =
+              data.message || "Failed to send. Please try again.";
+            fb.className = "cf-msg error";
+          }
+        } catch (e) {
+          fb.textContent = "Server not reachable. Please email us directly.";
+          fb.className = "cf-msg error";
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        }
+      }
+    </script>
+    <script src="/chatbot-widget.js"></script>
+  </body>
+</html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MediFlow Pro | About Us</title>
