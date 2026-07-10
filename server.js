@@ -44,7 +44,16 @@ app.get("/", (req, res) => {
 // { index: false } stops these from auto-serving index.html for "/" or any
 // other directory-style request, so the explicit "/" route above is always
 // the one that decides what opens by default.
-app.use(express.static(path.join(__dirname, "frontend"), { index: false }));
+app.use(express.static(path.join(__dirname, "frontend"), {
+  index: false,
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith(".html")) {
+      res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
+    }
+  },
+}));
 app.use(express.static(__dirname, { index: false })); // fallback: files next to server.js
 
 // ─── API Routes ───────────────────────────────────────────────────────────────

@@ -1042,6 +1042,8 @@
           client_id: GOOGLE_CLIENT_ID,
           callback: handleGoogleCredentialResponse,
         });
+
+        console.log("Frontend Client ID:", GOOGLE_CLIENT_ID);
         const btnContainer = document.getElementById("google-btn-login");
         if (btnContainer) {
           google.accounts.id.renderButton(btnContainer, {
