@@ -919,7 +919,7 @@
     <div id="toast">Operation Successful</div>
 
     <script>
-     const API = "http://localhost:5000/api";
+     const API = "https://hospitalsystem-nhc0.onrender.com/api";
       let authToken = localStorage.getItem("mf_token") || null;
       let currentUser = JSON.parse(localStorage.getItem("mf_user") || "null");
       let state = {
@@ -1030,7 +1030,7 @@
       /* ── GOOGLE SIGN-IN ───────────────────────────────────────────── */
       // replace with your real Client ID
 
-      const GOOGLE_CLIENT_ID = "680101365187-t112nc54kk3f2ecn5lvnktcl5khm52rm.apps.googleusercontent.com";
+      const GOOGLE_CLIENT_ID = "680101365187-geqf5lm9f59a6s8g499lm0ep9qv7o5io.apps.googleusercontent.com";
 
       function initGoogleSignIn() {
         if (!window.google || !google.accounts || !google.accounts.id) {
