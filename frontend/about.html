@@ -592,173 +592,16 @@
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
 
-      /* ══════════════════════════════════════════════════════════════
-         MOBILE RESPONSIVE ENHANCEMENTS
-         (Desktop layout above is untouched; these rules only apply
-         at/under each breakpoint via max-width media queries.)
-      ══════════════════════════════════════════════════════════════ */
-
-      html,
-      body {
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-      img,
-      svg,
-      video {
-        max-width: 100%;
-        height: auto;
-      }
-
-      .nav-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.4rem;
-        color: var(--primary);
-        cursor: pointer;
-        padding: 8px 10px;
-        border-radius: 8px;
-        line-height: 1;
-      }
-      .nav-toggle:hover {
-        background: rgba(79, 70, 229, 0.08);
-      }
-
-      /* ── Tablet & below (≤1024px) ─────────────────────────────── */
-      @media (max-width: 1024px) {
-        .section {
-          padding: 4.5rem 5%;
-        }
-      }
-
-      /* ── Mobile & small tablet (≤768px) ───────────────────────── */
       @media (max-width: 768px) {
         .mission-grid,
-        .contact-grid,
-        .values-grid,
-        .team-grid,
-        .tech-grid {
-          grid-template-columns: 1fr !important;
+        .contact-grid {
+          grid-template-columns: 1fr;
         }
         .page-header h1 {
           font-size: 2rem;
         }
-
-        /* Hamburger nav */
-        .nav-toggle {
-          display: block;
-        }
-        nav {
-          padding: 0 4%;
-        }
-        .nav-mobile-group {
+        nav .nav-links-bar {
           display: none;
-          position: absolute;
-          top: 70px;
-          left: 0;
-          right: 0;
-          background: #fff;
-          flex-direction: column;
-          align-items: stretch;
-          gap: 0;
-          padding: 0.5rem 4% 1.25rem;
-          border-bottom: 1px solid var(--border);
-          box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
-          max-height: calc(100vh - 70px);
-          overflow-y: auto;
-        }
-        .nav-mobile-group.open {
-          display: flex;
-        }
-        .nav-links-bar {
-          flex-direction: column;
-          align-items: stretch;
-          gap: 0;
-          width: 100%;
-        }
-        .nav-links-bar li {
-          list-style: none;
-          width: 100%;
-        }
-        .nav-links-bar a {
-          display: block;
-          padding: 0.9rem 0.25rem;
-          border-bottom: 1px solid var(--border);
-          font-size: 1rem;
-        }
-        .nav-cta {
-          flex-direction: column !important;
-          width: 100%;
-          margin-top: 0.75rem;
-        }
-        .nav-cta .btn {
-          width: 100%;
-          justify-content: center;
-          padding: 0.85rem 1.4rem;
-        }
-
-        .section {
-          padding: 3.5rem 5%;
-        }
-        .section-title {
-          font-size: 1.7rem;
-        }
-
-        .footer-inner {
-          flex-direction: column;
-          gap: 1.25rem;
-          text-align: center;
-        }
-        .footer-links {
-          flex-wrap: wrap;
-          justify-content: center;
-        }
-      }
-
-      /* ── Large phones (≤425px) ────────────────────────────────── */
-      @media (max-width: 425px) {
-        .page-header h1 {
-          font-size: 1.7rem;
-        }
-        .section-title {
-          font-size: 1.5rem;
-        }
-      }
-
-      /* ── Small phones (≤375px) ────────────────────────────────── */
-      @media (max-width: 375px) {
-        .page-header h1 {
-          font-size: 1.5rem;
-        }
-        .section-title {
-          font-size: 1.35rem;
-        }
-      }
-
-      /* ── Extra small phones (≤320px) ──────────────────────────── */
-      @media (max-width: 320px) {
-        .nav-logo {
-          font-size: 1.05rem;
-        }
-        .section-title {
-          font-size: 1.2rem;
-        }
-      }
-
-      /* Touch-friendly tap targets across mobile/tablet */
-      @media (max-width: 768px) {
-        .btn {
-          min-height: 44px;
-        }
-        input,
-        textarea,
-        select {
-          min-height: 44px;
-        }
-        a,
-        button {
-          -webkit-tap-highlight-color: rgba(79, 70, 229, 0.15);
         }
       }
     </style>
@@ -769,26 +612,15 @@
       <div class="nav-logo">
         <i class="fas fa-shield-virus"></i> MediFlow Pro
       </div>
-      <button
-        class="nav-toggle"
-        id="navToggle"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-        aria-controls="navMobileGroup"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="nav-mobile-group" id="navMobileGroup">
-        <ul class="nav-links-bar">
-          <li><a href="home.html">Home</a></li>
-          <li><a href="about.html" class="active">About</a></li>
-          <li><a href="home.html#features">Features</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="nav-cta" style="display: flex; gap: 10px">
-          <a href="index.html" class="btn btn-outline">Sign In</a>
-          <a href="index.html" class="btn btn-solid">Get Started</a>
-        </div>
+      <ul class="nav-links-bar">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="home.html#features">Features</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div style="display: flex; gap: 10px">
+        <a href="index.html" class="btn btn-outline">Sign In</a>
+        <a href="index.html" class="btn btn-solid">Get Started</a>
       </div>
     </nav>
 
@@ -1237,26 +1069,6 @@
           btn.disabled = false;
           btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
         }
-      }
-
-      // Mobile hamburger menu toggle
-      const navToggle = document.getElementById("navToggle");
-      const navMobileGroup = document.getElementById("navMobileGroup");
-      if (navToggle && navMobileGroup) {
-        navToggle.addEventListener("click", function () {
-          const isOpen = navMobileGroup.classList.toggle("open");
-          navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-          navToggle.innerHTML = isOpen
-            ? '<i class="fas fa-times"></i>'
-            : '<i class="fas fa-bars"></i>';
-        });
-        navMobileGroup.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            navMobileGroup.classList.remove("open");
-            navToggle.setAttribute("aria-expanded", "false");
-            navToggle.innerHTML = '<i class="fas fa-bars"></i>';
-          });
-        });
       }
     </script>
     <script src="/chatbot-widget.js"></script>
